@@ -16,7 +16,7 @@
 	      <span class="icon-bar"></span>
 	      <span class="icon-bar"></span>
 	    </button>
-	    <a class="navbar-brand" href="#">Brand</a>
+	    <a class="navbar-brand" href="#">微博客</a>
 	  </div>
 	
 	  <!-- Collect the nav links, forms, and other content for toggling -->
@@ -29,22 +29,52 @@
 	      <button type="submit" class="btn btn-default">搜索</button>
 	    </form>
 	    <ul class="nav navbar-nav navbar-right">
-	      <li><a href="#">Link</a></li>
-	      <li class="dropdown">
-	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-	        <ul class="dropdown-menu">
-	          <li><a href="#">Action</a></li>
-	          <li><a href="#">Another action</a></li>
-	          <li><a href="#">Something else here</a></li>
-	          <li class="divider"></li>
-	          <li><a href="#">Separated link</a></li>
-	        </ul>
-	      </li>
+	      <li><a href="javascript:;" onclick="login()">登录</a></li>
+<!-- 	      <li class="dropdown"> -->
+<!-- 	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a> -->
+<!-- 	        <ul class="dropdown-menu"> -->
+<!-- 	          <li><a href="#">Action</a></li> -->
+<!-- 	          <li><a href="#">Another action</a></li> -->
+<!-- 	          <li><a href="#">Something else here</a></li> -->
+<!-- 	          <li class="divider"></li> -->
+<!-- 	          <li><a href="#">Separated link</a></li> -->
+<!-- 	        </ul> -->
+<!-- 	      </li> -->
 	    </ul>
 	  </div><!-- /.navbar-collapse -->
 	</nav>
 	
+	<div class="modal fade" id="userModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title">用户登录</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<!-- 登录表单 -->
+	        <form role="form" id="userForm">
+			  <div class="form-group">
+			    <label for="exampleInputEmail1">用户名</label>
+			    <input type="text" class="form-control" name="userName" id="userName" placeholder="用户名">
+			  </div>
+			  <div class="form-group">
+			    <label for="exampleInputPassword1">密码</label>
+			    <input type="password" class="form-control" name="userPwd" id="userPwd" placeholder="密码">
+			  </div>
+			</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	        <button type="button" class="btn btn-primary" onclick="checkLogin()">登录</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
 	<script type="text/javascript" src="bootstrap/js/jquery.min.js"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/comm.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
 </body>
 </html>
