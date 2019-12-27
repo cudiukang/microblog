@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.cdk.mapper.UserMapper">
+	<select id="checkUser" resultType="com.cdk.entity.User">
+		select * from user 
+		where u_name=#{userName} 
+		and u_pwd=#{userPwd}
+	</select>
+</mapper>

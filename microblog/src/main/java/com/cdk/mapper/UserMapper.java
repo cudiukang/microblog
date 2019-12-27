@@ -17,7 +17,7 @@ public interface UserMapper {
 	 * @param userPwd
 	 * @return
 	 */
-	@Select("select * from user where u_name=#{userName} and u_pwd=#{userPwd}")
+	//@Select("select * from user where u_name=#{userName} and u_pwd=#{userPwd}")
 	public List<User> checkUser(@Param("userName")String userName,
 			@Param("userPwd") String userPwd);
 }
