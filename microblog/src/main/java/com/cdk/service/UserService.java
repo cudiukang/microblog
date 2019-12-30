@@ -1,5 +1,8 @@
 package com.cdk.service;
 
+import com.cdk.entity.User;
+import java.util.List;;
+
 public interface UserService {
 	/**
 	 * 根据用户名和密码获取登录状态
@@ -7,5 +10,5 @@ public interface UserService {
 	 * @param userPwd
 	 * @return
 	 */
-	public boolean checkUser(String userName,String userPwd);
+	List<User> checkUser(String userName,String userPwd);
 }

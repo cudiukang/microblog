@@ -15,9 +15,9 @@ public class UserServiceImpl implements UserService {
 	private UserMapper userMapper;
 	
 	@Override
-	public boolean checkUser(String userName, String userPwd) {
+	public List<User> checkUser(String userName, String userPwd) {
 		List<User> list = userMapper.checkUser(userName, userPwd);
-		return list.size()>0;
+		return list;
 	}
 	
 }

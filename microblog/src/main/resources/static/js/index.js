@@ -18,6 +18,7 @@ function checkLogin(){
 			$("#userName").val("");
 			$("#userPwd").val("");
 			$("#userModal").modal("hide");
+			$("#operationUl,#loginUl").toggle();
 		},
 		error:function(){
 			alertModel("系统繁忙，请稍后再试。");
