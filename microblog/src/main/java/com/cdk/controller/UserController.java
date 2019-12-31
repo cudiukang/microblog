@@ -31,7 +31,32 @@ public class UserController {
 		}else {
 			fo.setMsg("登录成功。");
 			request.getSession().setAttribute("user", list.get(0));
+			fo.setObj(list.get(0));
 		}
+		return fo;
+	}
+	/**
+	 * 监测登录状态
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/checkLogin")
+	public FeedObject checkLogin(HttpServletRequest request) {
+		FeedObject fo = new FeedObject();
+		User user = (User) request.getSession().getAttribute("user");
+		fo.setState(user!=null);
+		fo.setObj(user);
+		return fo;
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping("/quit")
+	public FeedObject quit(HttpServletRequest request) {
+		FeedObject fo = new FeedObject();
+		request.getSession().removeAttribute("user");
+		fo.setState(true);
 		return fo;
 	}
 }

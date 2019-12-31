@@ -2,11 +2,11 @@
 <html>
 <head xmlns:th="http://www.thymeleaf.org">
 	<meta charset="UTF-8">
-	<title>被遗忘的鱼</title>
+	<title>问题发布</title>
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 	
 </head>
-<body>
+<body  style="background:#efefef">
 	<nav class="navbar navbar-default" role="navigation">
 	  <!-- Brand and toggle get grouped for better mobile display -->
 	  <div class="navbar-header">
@@ -28,25 +28,62 @@
 	      </div>
 	      <button type="submit" class="btn btn-default">搜索</button>
 	    </form>
-	    <ul class="nav navbar-nav navbar-right"  id="operationUl" style="display:none;">
-	      <li ><a href="#" id="userLogo"></a></li>
-	      <li><a href="/publish">发布问题</a></li>
-	      <li class="dropdown">
-	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">操作 <b class="caret"></b></a>
-	        <ul class="dropdown-menu">
-	          <li><a href="JavaScript:;" onclick="quitBtn();">退出</a></li>
-	          
-	          <li><a href="#">Something else here</a></li>
-	          <li class="divider"></li>
-	          <li><a href="#">Separated link</a></li>
-	        </ul>
-	      </li>
-	    </ul>
-	    <ul class="nav navbar-nav navbar-right" id="loginUl">
-	      <li><a href="javascript:;" onclick="login()">登录</a></li>
-	    </ul>
+<!-- 	    <ul class="nav navbar-nav navbar-right"> -->
+<!-- 	      <li><a href="javascript:;" onclick="login()">登录</a></li> -->
+<!-- 	      <li class="dropdown"> -->
+<!-- 	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a> -->
+<!-- 	        <ul class="dropdown-menu"> -->
+<!-- 	          <li><a href="#">Action</a></li> -->
+<!-- 	          <li><a href="#">Another action</a></li> -->
+<!-- 	          <li><a href="#">Something else here</a></li> -->
+<!-- 	          <li class="divider"></li> -->
+<!-- 	          <li><a href="#">Separated link</a></li> -->
+<!-- 	        </ul> -->
+<!-- 	      </li> -->
+<!-- 	    </ul> -->
 	  </div><!-- /.navbar-collapse -->
 	</nav>
+	
+	<!-- content -->
+	<div class="container-fluid">
+		<div class="row" style="margin:20px;background:white;">
+			<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+				<h2><span class="glyphicon glyphicon-plus"></span>
+				发起</h2>
+				<hr/>
+				<form id="publishForm">
+					<div class="form-group">
+					   <label for="title">问题标题:(简单扼要)</label>
+					   <input type="text" class="form-control" id="title" name="qTitle" placeholder="问题标题">
+					</div>
+					<div class="form-group">
+					   <label for="description">问题补充(必填)</label>
+					   <textarea class="form-control" id="description" name="description" placeholder="问题补充" rows="10" ></textarea>
+					</div>
+					<div class="form-group">
+					   <label for="tag">添加标签</label>
+					   <input type="text" class="form-control" id="tag" name="tag" placeholder="请输入问题标签，以逗号隔开">
+					</div>
+					
+				</form>
+				<button type="button" class="btn btn-success" style="margin-bottom:10px;" onclick="publish();">发布</button>
+<!-- 				<input type="button" value="发布" class="btn btn-info" onclick="publish();"> -->
+			    <a href="/" class="btn btn-success" style="margin-bottom:10px;">返回主页</a>
+			</div>
+			<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+				<h2>问题发起指南：<br></h2>
+				1、问题标题：请用简洁的语言描述您的问题；<br>
+				2、问题补充：详细补充您的问题，并确保问题描述清晰、直观，并提供一些资料；<br>
+				<br>
+				<br>
+				服务器运行环境：<br>
+				软件版本：<br>
+				问题发生的上下文信息：<br>
+				可以完整复现问题的代码<br>
+				补充完整的异常描述信息<br>
+			</div>
+		</div>
+	</div>
 	
 	<div class="modal fade" id="userModal">
 	  <div class="modal-dialog">
@@ -80,5 +117,6 @@
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/comm.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/publish.js"></script>
 </body>
 </html>
