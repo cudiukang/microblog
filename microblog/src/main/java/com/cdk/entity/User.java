@@ -2,12 +2,27 @@ package com.cdk.entity;
 
 public class User {
 	private Integer userId;
+	
 	private String uName;
+	
 	private String uPwd;
+	
 	private String uReal_name;
+	
 	private String uSex;
+	
 	private String uAddr;
+	
 	private Integer uAge;
+	
+	private String uHeadUrl;
+	
+	public String getuHeadUrl() {
+		return uHeadUrl;
+	}
+	public void setuHeadUrl(String uHeadUrl) {
+		this.uHeadUrl = uHeadUrl;
+	}
 	public Integer getUserId() {
 		return userId;
 	}

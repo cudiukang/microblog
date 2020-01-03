@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.cdk.mapper.QuestionMapper">
+	<select id="getQuertionPage" resultType="com.cdk.entity.QuestionVO">
+		select * from question q
+		left join user u
+		on q.creator_id=u.user_id
+		where q.tag like concat("%",#{searchInfo},"%")
+		or q.description like concat("%",#{searchInfo},"%")
+		or q.q_title like concat("%",#{searchInfo},"%")
+	</select>
+	<select id="getQuertionPageCount" resultType="int">
+		select count(*) from question q
+		left join user u
+		on q.creator_id=u.user_id
+		where q.tag like concat("%",#{searchInfo},"%")
+		or q.description like concat("%",#{searchInfo},"%")
+		or q.q_title like concat("%",#{searchInfo},"%")
+	</select>
+</mapper>
