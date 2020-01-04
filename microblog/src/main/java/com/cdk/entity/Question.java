@@ -6,8 +6,8 @@ public class Question {
 	private Integer questionId;
 	private String qTitle;
 	private String description;
-	private Date gmtCreate;
-	private Date gmtModify;
+	private Long gmtCreate;
+	private Long gmtModify;
 	private Integer viewCount;
 	private Integer likeCount;
 	private Integer commentCount;
@@ -45,16 +45,16 @@ public class Question {
 		this.description = description;
 	}
 	
-	public Date getGmtCreate() {
+	public Long getGmtCreate() {
 		return gmtCreate;
 	}
-	public void setGmtCreate(Date gmtCreate) {
+	public void setGmtCreate(Long gmtCreate) {
 		this.gmtCreate = gmtCreate;
 	}
-	public Date getGmtModify() {
+	public Long getGmtModify() {
 		return gmtModify;
 	}
-	public void setGmtModify(Date gmtModify) {
+	public void setGmtModify(Long gmtModify) {
 		this.gmtModify = gmtModify;
 	}
 	public Integer getViewCount() {

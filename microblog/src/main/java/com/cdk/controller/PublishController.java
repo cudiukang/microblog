@@ -42,7 +42,7 @@ public class PublishController {
 		question.setLikeCount(0);
 		question.setViewCount(0);
 		question.setCommentCount(0);
-		question.setGmtCreate(new Date());
+		question.setGmtCreate(new Date().getTime());
 		
 		Integer rows = questionService.addQuestion(question);
 		

@@ -1,9 +1,9 @@
 $(function(){
 	checkLoginState();
 	
-	//initData();
-	
 	initTable();
+	
+	initHotTitle();
 });
 
 function checkLoginState(){
@@ -58,6 +58,7 @@ function checkLogin(){
 	});
 }
 
+//退出
 function quitBtn(){
 	$.ajax({
 		url:"/quit",
@@ -75,58 +76,8 @@ function quitBtn(){
 	});
 }
 
-function initData(){
-	$.ajax({
-		url:"/getQuertionPage",
-		type:"post",
-		data:{},
-		dataType:"json",
-		success:function(res){
-			if(res.state){
-				var strs = "";
-				for(var i=0;i<res.obj.length;i++){
-					debugger;
-					//计算创建间隔时间
-					var createDate = res.obj[i].gmtCreate;
-					var time = new Date().getTime()-createDate;
-					var info = "";
-					if((time/1000/60)<60	){
-						info = parseInt(time/1000/60)+"分钟";
-					}else if((time/1000/60/60)<24){
-						info = parseInt(time/1000/60/60)+"小时";
-					}else if((time/1000/60/60/24/30)<12){
-						info = parseInt(time/1000/60/60/24/30)+"月";
-					}else{
-						info = parseInt(time/1000/60/60/30/12)+"年";
-					}
-					
-					//绑定数据
-					strs += '<div class="media"> '+
-					  '<a class="pull-left" href="#"> '+
-					  '  <img style="width:60px;" class="media-object" src="'+res.obj[i].uHeadUrl+'"> '+
-					  '</a> '+
-					  '<div class="media-body"> '+
-						'  <h4 class="media-heading">'+res.obj[i].qTitle+'</h4> '+
-						'  <a>点击查看详情。。。</a> '+
-						'  <br> '+
-						res.obj[i].commentCount+' 个回复    |    '+res.obj[i].viewCount+' 次浏览    |    '+info+' 前    |     '+res.obj[i].likeCount+' 次点赞 '+
-					  '</div> '+
-					'</div> '+
-					'<hr> ';
-					
-					
-				}
-				$("#questionContentId").append(strs);
-			}else{
-				alertModel("系统繁忙，请稍后再试。");
-			}
-		},
-		error:function(){
-			alertModel("系统繁忙，请稍后再试。");
-		}
-	});
-}
 
+//表格初始化
 function initTable(){
 	// 先销毁表格
     $('#tb').bootstrapTable('destroy');
@@ -166,12 +117,14 @@ function initTable(){
 				var info = "";
 				if((time/1000/60)<60	){
 					info = parseInt(time/1000/60)+"分钟";
-				}else if((time/1000/60/24)<60){
-					info = parseInt(time/1000/60)+"小时";
-				}else if((time/1000/60/24/30)<12){
-					info = parseInt(time/1000/60)+"月";
+				}else if((time/1000/60/60)<24){
+					info = parseInt(time/1000/60/60)+"小时";
+				}else if((time/1000/60/60/24)<30){
+					info = parseInt(time/1000/60/60/24)+"天";
+				}else if((time/1000/60/60/24)<12){
+					info = parseInt(time/1000/60/60/24)+"月";
 				}else{
-					info = parseInt(time/1000/60/12)+"年";
+					info = parseInt(time/1000/60/60/24/12)+"年";
 				}
 				
 				//绑定数据
@@ -204,7 +157,28 @@ function initTable(){
     });
 }
 
+//查找
 function searchQuestion(){
 	initTable();
+}
+
+//初始化热点信息
+function initHotTitle(){
+	$.ajax({
+		url:"/getHotInfo",
+		type:"post",
+		data:{},
+		dataType:"json",
+		success:function(res){
+			var strs = "";
+			for(var i=0;i<res.obj.length;i++){
+				strs += "<a>"+(i+1)+"、 "+res.obj[i].qTitle+"</a><br><br>";
+			}
+			$("#hotTitleDiv").append(strs);
+		},
+		error:function(){
+			alertModel("系统繁忙，请稍后再试。");
+		}
+	});
 }
 

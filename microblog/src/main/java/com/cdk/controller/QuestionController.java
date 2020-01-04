@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cdk.entity.FeedObject;
+import com.cdk.entity.Question;
 import com.cdk.entity.QuestionVO;
 import com.cdk.service.QuestionService;
 
@@ -42,6 +43,18 @@ public class QuestionController {
 		
 		fo.setState(true);
 		fo.setObj(map);
+		
+		return fo;
+	}
+	
+	@ResponseBody
+	@RequestMapping("getHotInfo")
+	public FeedObject getHotInfo() {
+		FeedObject fo = new FeedObject();
+		
+		List<Question> list = questionService.getHotInfo();
+		fo.setState(true);
+		fo.setObj(list);
 		
 		return fo;
 	}

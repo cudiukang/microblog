@@ -19,4 +19,9 @@
 		or q.description like concat("%",#{searchInfo},"%")
 		or q.q_title like concat("%",#{searchInfo},"%")
 	</select>
+	<select id="getHotInfo" resultType="com.cdk.entity.Question">
+		select * from question
+		order by view_count,like_count desc
+		limit 0,10
+	</select>
 </mapper>

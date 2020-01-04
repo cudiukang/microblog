@@ -34,4 +34,9 @@ public class QuestionServiceImpl implements QuestionService {
 		return questionMapper.getQuertionPageCount(searchInfo);
 	}
 
+	@Override
+	public List<Question> getHotInfo() {
+		return questionMapper.getHotInfo();
+	}
+
 }

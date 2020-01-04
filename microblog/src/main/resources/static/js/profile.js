@@ -62,12 +62,14 @@ function initTable(){
 				var info = "";
 				if((time/1000/60)<60	){
 					info = parseInt(time/1000/60)+"分钟";
-				}else if((time/1000/60/24)<60){
-					info = parseInt(time/1000/60)+"小时";
-				}else if((time/1000/60/24/30)<12){
-					info = parseInt(time/1000/60)+"月";
+				}else if((time/1000/60/60)<24){
+					info = parseInt(time/1000/60/60)+"小时";
+				}else if((time/1000/60/60/24)<30){
+					info = parseInt(time/1000/60/60/24)+"天";
+				}else if((time/1000/60/60/24)<12){
+					info = parseInt(time/1000/60/60/24)+"月";
 				}else{
-					info = parseInt(time/1000/60/12)+"年";
+					info = parseInt(time/1000/60/60/24/12)+"年";
 				}
 				
 				//绑定数据

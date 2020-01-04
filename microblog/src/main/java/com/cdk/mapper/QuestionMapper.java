@@ -29,4 +29,6 @@ public interface QuestionMapper {
 	 * @return
 	 */
 	Integer getQuertionPageCount(String searchInfo);
+	
+	List<Question> getHotInfo();
 }
