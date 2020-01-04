@@ -29,6 +29,9 @@ public interface QuestionMapper {
 	 * @return
 	 */
 	Integer getQuertionPageCount(String searchInfo);
-	
+	/**
+	 * 获取热点信息
+	 * @return
+	 */
 	List<Question> getHotInfo();
 }
