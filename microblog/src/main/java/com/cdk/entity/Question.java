@@ -55,6 +55,7 @@ public class Question {
 		return gmtModify;
 	}
 	public void setGmtModify(Long gmtModify) {
+
 		this.gmtModify = gmtModify;
 	}
 	public Integer getViewCount() {
