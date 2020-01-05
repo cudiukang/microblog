@@ -13,4 +13,14 @@
 		where question_id = #{questionId} 
 		and follow_user_id = #{followUserId}
 	</delete>
+	<select id="getFollowByUserId" parameterType="int" resultType="com.cdk.entity.FollowDTO">
+		select * from question_follow qf
+		left join question q
+		on q.question_id = qf.question_id
+		left join `user` u
+		on q.creator_id = u.user_id
+		where u.user_id = #{userId}
+		order by gmt_create desc
+		limit 0,10
+	</select>
 </mapper>

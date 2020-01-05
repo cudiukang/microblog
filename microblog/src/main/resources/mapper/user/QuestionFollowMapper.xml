@@ -10,6 +10,7 @@
 		where q.tag like concat("%",#{searchInfo},"%")
 		or q.description like concat("%",#{searchInfo},"%")
 		or q.q_title like concat("%",#{searchInfo},"%")
+		order by gmt_create desc
 	</select>
 	<select id="getQuertionPageCount" resultType="int">
 		select count(*) from question q
