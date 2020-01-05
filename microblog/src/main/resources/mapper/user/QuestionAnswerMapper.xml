@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.cdk.mapper.QuestionAnswerMapper">
+	<insert id="addQuestionAnswer" parameterType="com.cdk.entity.QuestionAnswer">
+		insert into question_answer
+		(question_id,answer_person_id,answer_content,remark,answer_time)
+		values(
+			#{questionId},#{answerPersonId},#{answerContent},#{remark},#{answerTime}
+		)
+	</insert>
+	<select id="getAnswerById" parameterType="int" resultType="com.cdk.entity.AnswerDTO">
+		select * from question_answer qa
+		left join question qt
+		on qa.question_id = qt.question_id
+		left join user u
+		on qt.creator_id = u.user_id
+		where  qt.question_id = #{questionId}
+		order by qa.answer_time asc
+	</select>
+</mapper>

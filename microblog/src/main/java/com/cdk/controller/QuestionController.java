@@ -2,6 +2,7 @@ package com.cdk.controller;
 
 
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,12 +15,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cdk.entity.AnswerDTO;
 import com.cdk.entity.FeedObject;
 
 import com.cdk.entity.Question;
+import com.cdk.entity.QuestionAnswer;
 import com.cdk.entity.QuestionFollow;
 import com.cdk.entity.QuestionVO;
 import com.cdk.entity.User;
+import com.cdk.service.QuestionAnswerService;
 import com.cdk.service.QuestionFollowService;
 import com.cdk.service.QuestionService;
 
@@ -31,6 +35,9 @@ public class QuestionController {
 	
 	@Autowired
 	private QuestionFollowService questionFollowService;
+	
+	@Autowired
+	private QuestionAnswerService questionAnswerService;
 	
 	/**
 	 * 获取分页数据
@@ -81,6 +88,9 @@ public class QuestionController {
 		questionService.updateQuestionById(qvo);
 		model.addAttribute("dto", qvo);
 		
+		List<AnswerDTO> list = questionAnswerService.getAnswerById(qvo.getQuestionId());
+		model.addAttribute("answers", list);
+		
 		return "questionDetail";
 	}
 	/**
@@ -125,6 +135,7 @@ public class QuestionController {
 	public FeedObject okQuestion(HttpServletRequest request,
 			boolean followState,Integer questionId) {
 		FeedObject fo = new FeedObject();
+		fo.setState(true);
 		
 		//获取当前用户id
 		User user = (User) request.getSession().getAttribute("user");
@@ -145,6 +156,32 @@ public class QuestionController {
 			qvo.setLikeCount(qvo.getLikeCount()-1);
 			questionService.updateQuestionById(qvo);
 		}
+		
+		return fo;
+	}
+	
+	@RequestMapping("answerQuestion")
+	@ResponseBody
+	public FeedObject answerQuestion(HttpServletRequest request,
+			String answerText,Integer questionId) {
+		FeedObject fo = new FeedObject();
+		fo.setState(true);
+		
+		//获取当前用户id
+		User user = (User) request.getSession().getAttribute("user");
+		if(user==null) {
+			fo.setState(false);
+			fo.setMsg("请先登录。");
+			return fo;
+		}
+		
+		//封装数据并添加到数据库
+		QuestionAnswer qa = new QuestionAnswer();
+		qa.setAnswerPersonId(user.getUserId());
+		qa.setQuestionId(questionId);
+		qa.setAnswerContent(answerText);
+		qa.setAnswerTime(new Date().getTime());
+		questionAnswerService.addQuestionAnswer(qa);
 		
 		return fo;
 	}

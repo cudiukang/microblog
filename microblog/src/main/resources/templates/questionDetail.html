@@ -13,7 +13,7 @@
 	<div class="container-fluid">
 		<div class="row" style="background:white;margin:0 10px;">
 			<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12"  id="questionContentId">
-				<h2 th:text="${dto.qTitle}"><span class="glyphicon glyphicon-list"></span></h2>
+				<h3 th:text="${dto.qTitle}"><span class="glyphicon glyphicon-list"></span></h3>
 				<hr/>
 				
 				<span>发布人：</span>
@@ -31,15 +31,31 @@
 				<hr>
 				
 				<span>回复数：</span>
-				<span th:text="${dto.commentCount}"></span>
+				<span th:text="${answers.size()}"></span>
 				<hr>
 				
-				需要回复问题，请先登录
+				<div th:each="answer:${answers}">
+					<span th:text="${answer.uName}"></span>
+					发表于：
+					<span th:text="${#dates.format(answer.answerTime,'yyyy-MM-dd hh:mm:ss')}"></span>
+					<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<span th:text="${answer.answerContent}"></span>
+					<br>
+				</div>
+				<hr>
+				
+				<textarea id="answerText" class="form-control" rows="5" placeholder="请发表你的看法。。。"></textarea>
+				<br>
+				<button class="btn btn-info" onclick="answerBtn();">提交</button>
+				<hr>
 			</div>
 			<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-				<h2>相关问题<br></h2>
+				<h2>作者简介<br></h2>
 				<hr>
-				
+				<br>
+				<h2>Ta的发布<br></h2>
+				<hr>
 			</div>
 		</div>
 	</div>
@@ -51,74 +67,7 @@
 	<script type="text/javascript" src="js/comm.js"></script>
 	<script type="text/javascript"  src="js/questionDetail.js"></script>
 	<script type="text/javascript" th:inline="javascript">
-	
-		//初始化关注按钮
-		btnStyle("#follow","+关注","已关注","取消关注","/followQuestion");
-		btnStyle("#ok","+点赞","已点赞","取消点赞","/okQuestion");
-		/**
-		 * 动态设置样式
-		 * @param btnClass
-		 * @param str1 
-		 * @param str2 
-		 * @param str3 
-		 * @param url 
-		 * @returns
-		 */
-		function btnStyle(btnClass,str1,str2,str3,url){
-			$(btnClass).click(function(){
-				let flag=$(this).hasClass("hh");
-				
-				var questionId = [[${dto.questionId}]];
-				$.ajax({
-					url:url,
-					data:{
-						followState:flag,
-						questionId:questionId
-					},
-					dataType:"json",
-					type:"post",
-					async:false,
-					success:function(res){
-						if(!(res.state)){
-							alertModel(res.msg);
-							return; 
-						}
-						
-						if(flag){
-							$(btnClass).text(str1)
-							$(btnClass).addClass("cur")
-							$(btnClass).removeClass("hh")
-						}else{
-							// $(this).addClass()
-							$(btnClass).text(str2)
-							$(btnClass).addClass("hh")
-							$(btnClass).removeClass("cur")
-						}
-					},
-					error:function(){
-						
-					}
-				});
-				
-				
-			});
-			$(btnClass).mouseover(function(){
-				let flag=$(this).hasClass("hh");
-				console.log(flag,888)
-				if(flag){
-					$(this).text(str3)
-				}else{
-					$(this).text(str1)
-				}
-				
-			});
-			$(btnClass).mouseout(function(){
-				let flag=$(this).hasClass("hh");
-				if(flag){
-					$(this).text(str2)
-				}
-			});
-		}
+		var questionId = [[${dto.questionId}]];
 	</script>
 </body>
 </html>

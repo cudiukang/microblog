@@ -353,7 +353,6 @@ function checkLogin(){
 		dataType:"json",
 		success:function(res){
 			if(res.state){
-				alertModel("登录成功。");
 			}else{
 				alertModel("用户名或者密码错误。");
 			}
