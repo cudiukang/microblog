@@ -48,4 +48,9 @@ public class QuestionServiceImpl implements QuestionService {
 		return questionMapper.updateQuestionById(q);
 	}
 
+	@Override
+	public List<Question> getQuestionByUserId(Integer userId) {
+		return questionMapper.getQuestionByUserId(userId);
+	}
+
 }

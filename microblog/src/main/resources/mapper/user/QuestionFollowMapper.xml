@@ -37,4 +37,9 @@
 			comment_count=#{commentCount},tag=#{tag}
 		where question_id = #{questionId}
 	</update>
+	<select id="getQuestionByUserId" parameterType="int" resultType="com.cdk.entity.Question">
+		select * from question
+		order by gmt_create desc
+		limit 0,10
+	</select>
 </mapper>

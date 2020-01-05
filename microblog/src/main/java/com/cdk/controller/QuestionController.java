@@ -82,14 +82,17 @@ public class QuestionController {
 	 */
 	@RequestMapping("questionDetail")
 	public String questionDetail(Model model,Integer id) {
-		
+		//添加用户信息
 		QuestionVO qvo = questionService.getQuestionById(id);
 		qvo.setViewCount(qvo.getViewCount()+1);
 		questionService.updateQuestionById(qvo);
 		model.addAttribute("dto", qvo);
-		
+		//添加回复信息
 		List<AnswerDTO> list = questionAnswerService.getAnswerById(qvo.getQuestionId());
 		model.addAttribute("answers", list);
+		//添加发布信息
+		List<Question> questions = questionService.getQuestionByUserId(qvo.getCreatorId());
+		model.addAttribute("questions", questions);
 		
 		return "questionDetail";
 	}

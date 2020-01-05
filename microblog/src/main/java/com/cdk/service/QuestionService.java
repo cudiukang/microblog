@@ -45,4 +45,10 @@ public interface QuestionService {
 	 * @return
 	 */
 	Integer updateQuestionById(QuestionVO q);
+	/**
+	 * 根据用户id查询问题
+	 * @param userId
+	 * @return
+	 */
+	List<Question> getQuestionByUserId(Integer userId);
 }

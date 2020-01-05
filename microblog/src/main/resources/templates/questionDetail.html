@@ -52,9 +52,24 @@
 			</div>
 			<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
 				<h2>作者简介<br></h2>
-				<hr>
+				<span>账号：</span>
+				<span th:text="${dto.uName}"></span>
 				<br>
+				<span>真实姓名：</span>
+				<span th:text="${dto.uRealName}"></span>
+				<br>
+				<span>性别：</span>
+				<span th:text="${dto.uSex}"></span>
+				<br>
+				<span>年龄：</span>
+				<span th:text="${dto.uAge}"></span>
+				<br>
+				<hr>
 				<h2>Ta的发布<br></h2>
+				<div th:each="question:${questions}">
+					<a th:text="${question.qTitle}" th:href="'/questionDetail?id='+${question.questionId}"></a>
+					<br>
+				</div>
 				<hr>
 			</div>
 		</div>
