@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.cdk.entity.Question;
 import com.cdk.entity.QuestionVO;
-import com.cdk.entity.User;
 
 /**
  * 问题业务层
@@ -35,4 +34,9 @@ public interface QuestionService {
 	 * @return
 	 */
 	List<Question> getHotInfo();
+	/**
+	 * 根据id查询问题
+	 * @return
+	 */
+	QuestionVO getQuestionById(Integer id);
 }

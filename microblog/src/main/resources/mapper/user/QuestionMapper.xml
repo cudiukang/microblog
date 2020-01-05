@@ -24,4 +24,13 @@
 		order by view_count,like_count desc
 		limit 0,10
 	</select>
+	<select id="getQuestionById" parameterType="int" resultType="com.cdk.entity.QuestionVO" >
+		select * from question q
+		left join user u
+		on q.creator_id=u.user_id
+		where q.question_id = #{id}
+	</select>
+	<update id="updateQuestionById">
+		
+	</update>
 </mapper>

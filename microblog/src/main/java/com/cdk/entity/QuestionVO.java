@@ -1,7 +1,5 @@
 package com.cdk.entity;
 
-import java.util.Date;
-
 public class QuestionVO {
 	private Integer questionId;
 	
@@ -25,6 +23,46 @@ public class QuestionVO {
 	
 	private String uHeadUrl;
 	
+	private String uName;
+	
+	private String uRealName;
+	
+	private String uSex;
+	
+	private String uAddr;
+	
+	private Integer uAge;
+	
+	public String getuName() {
+		return uName;
+	}
+	public void setuName(String uName) {
+		this.uName = uName;
+	}
+	public String getuRealName() {
+		return uRealName;
+	}
+	public void setuRealName(String uRealName) {
+		this.uRealName = uRealName;
+	}
+	public String getuSex() {
+		return uSex;
+	}
+	public void setuSex(String uSex) {
+		this.uSex = uSex;
+	}
+	public String getuAddr() {
+		return uAddr;
+	}
+	public void setuAddr(String uAddr) {
+		this.uAddr = uAddr;
+	}
+	public Integer getuAge() {
+		return uAge;
+	}
+	public void setuAge(Integer uAge) {
+		this.uAge = uAge;
+	}
 	public String getuHeadUrl() {
 		return uHeadUrl;
 	}

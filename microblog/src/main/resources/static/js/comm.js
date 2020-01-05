@@ -313,6 +313,30 @@ function addOptionToSelect1(selectName,url,id){
 	});
 }
 
+function checkLoginState(){
+	$.ajax({
+		url:"/checkLogin",
+		type:"post",
+		data:{},
+		dataType:"json",
+		success:function(res){
+			if(res.state){
+				//隐藏登录按钮,显示操作按钮
+				$("#operationUl,#loginUl").toggle();
+				//设置名称
+				$("#userLogo").text(res.obj.uName);
+			}
+		},
+		error:function(){
+			alertModel("系统繁忙，请稍后再试。");
+		}
+	});
+}
+
+//即时搜索
+function searchOnCurrent(){
+	initTable();
+}
 
 
 

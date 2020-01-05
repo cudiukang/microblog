@@ -2,7 +2,7 @@
 <html>
 <head xmlns:th="http://www.thymeleaf.org">
 	<meta charset="UTF-8">
-	<title>个人中心</title>
+	<title th:text="${dto.qTitle}">发现详情</title>
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="bootstrap/css/bootstrap-table.min.css">
 </head>
@@ -12,25 +12,30 @@
 	<div class="container-fluid">
 		<div class="row" style="background:white;margin:0 10px;">
 			<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12"  id="questionContentId">
-				<h3><span class="glyphicon glyphicon-list"></span>  发布的问题</h3>
+				<h2 th:text="${dto.qTitle}"><span class="glyphicon glyphicon-list"></span></h2>
 				<hr/>
-				<table id="tb"></table>
+				
+				<span>发布人：</span>
+				<span th:text="${dto.uName}"></span> | 
+				<span>发布时间：</span>
+				<span th:text="${#dates.format(dto.gmtCreate,'yyyy-MM-dd')}"></span> | 
+				<span>阅读数：</span>
+				<span th:text="${dto.viewCount}"></span> 
+				
+				<hr>
+				<div th:text="${dto.description}"></div>
+				<hr>
+				
+				<span>回复数：</span>
+				<span th:text="${dto.commentCount}"></span>
+				<hr>
+				
+				需要回复问题，请先登录
 			</div>
 			<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-				<h3>热门话题<br></h3>
+				<h2>相关问题<br></h2>
 				<hr>
-				<a>有关于redis的问题请教？</a>
-				<br>
-				<br>
-				<a>springboot mybatis如何绑定？</a>
-				<br>
-				<br>
-				<a>有关学习效率的问题？</a>
-				<br>
-				<br>
-				<a>如何快速学习好springboot?</a>
-				<br>
-				<br>
+				
 			</div>
 		</div>
 	</div>
@@ -40,6 +45,6 @@
 	<script type="text/javascript" src="bootstrap/js/bootstrap-table.min.js"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap-table-zh-CN.js"></script>
 	<script type="text/javascript" src="js/comm.js"></script>
-	<script type="text/javascript" src="js/profile.js"></script>
+	<script type="text/javascript" src="js/questionDetail.js"></script>
 </body>
 </html>

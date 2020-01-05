@@ -6,25 +6,7 @@ $(function(){
 	initHotTitle();
 });
 
-function checkLoginState(){
-	$.ajax({
-		url:"/checkLogin",
-		type:"post",
-		data:{},
-		dataType:"json",
-		success:function(res){
-			if(res.state){
-				//隐藏登录按钮,显示操作按钮
-				$("#operationUl,#loginUl").toggle();
-				//设置名称
-				$("#userLogo").text(res.obj.uName);
-			}
-		},
-		error:function(){
-			alertModel("系统繁忙，请稍后再试。");
-		}
-	});
-}
+
 
 function login(){
 	$("#userModal").modal("show");
@@ -134,7 +116,7 @@ function initTable(){
 				  '</a> '+
 				  '<div class="media-body"> '+
 					'  <h4 class="media-heading">'+row.qTitle+'</h4> '+
-					'  <a>点击查看详情。。。</a> '+
+					'  <a href="/questionDetail?id='+row.questionId+'">点击查看详情。。。</a> '+
 					'  <br> '+
 					row.commentCount+' 个回复    |    '+row.viewCount+' 次浏览    |    '+info+' 前    |     '+row.likeCount+' 次点赞 '+
 				  '</div> '+
@@ -170,9 +152,10 @@ function initHotTitle(){
 		data:{},
 		dataType:"json",
 		success:function(res){
+			console.log(res.obj);
 			var strs = "";
 			for(var i=0;i<res.obj.length;i++){
-				strs += "<a>"+(i+1)+"、 "+res.obj[i].qTitle+"</a><br><br>";
+				strs += "<a href='/questionDetail?id="+res.obj[i].questionId+"'>"+(i+1)+"、 "+res.obj[i].qTitle+"</a><br><br>";
 			}
 			$("#hotTitleDiv").append(strs);
 		},

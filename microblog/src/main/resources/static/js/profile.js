@@ -3,25 +3,6 @@ $(function(){
 	initTable();
 });
 
-function checkLoginState(){
-	$.ajax({
-		url:"/checkLogin",
-		type:"post",
-		data:{},
-		dataType:"json",
-		success:function(res){
-			if(res.state){
-				//隐藏登录按钮,显示操作按钮
-				$("#operationUl,#loginUl").toggle();
-				//设置名称
-				$("#userLogo").text(res.obj.uName);
-			}
-		},
-		error:function(){
-			alertModel("系统繁忙，请稍后再试。");
-		}
-	});
-}
 
 function initTable(){
 	// 先销毁表格
@@ -79,7 +60,7 @@ function initTable(){
 				  '</a> '+
 				  '<div class="media-body"> '+
 					'  <h4 class="media-heading">'+row.qTitle+'</h4> '+
-					'  <a>点击查看详情。。。</a> '+
+					'  <a href="/questionDetail?id='+row.questionId+'">点击查看详情。。。</a> '+
 					'  <br> '+
 					row.commentCount+' 个回复    |    '+row.viewCount+' 次浏览    |    '+info+' 前    |     '+row.likeCount+' 次点赞 '+
 				  '</div> '+

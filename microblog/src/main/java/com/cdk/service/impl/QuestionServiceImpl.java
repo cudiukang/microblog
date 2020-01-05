@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.cdk.entity.Question;
 import com.cdk.entity.QuestionVO;
-import com.cdk.entity.User;
 import com.cdk.mapper.QuestionMapper;
 import com.cdk.service.QuestionService;
 import com.github.pagehelper.PageHelper;
@@ -37,6 +36,11 @@ public class QuestionServiceImpl implements QuestionService {
 	@Override
 	public List<Question> getHotInfo() {
 		return questionMapper.getHotInfo();
+	}
+
+	@Override
+	public QuestionVO getQuestionById(Integer id) {
+		return questionMapper.getQuestionById(id);
 	}
 
 }

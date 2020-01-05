@@ -34,4 +34,15 @@ public interface QuestionMapper {
 	 * @return
 	 */
 	List<Question> getHotInfo();
+	/**
+	 * 根据id查询问题
+	 * @return
+	 */
+	QuestionVO getQuestionById(Integer id);
+	/**
+	 * 根据对象修改question
+	 * @param q
+	 * @return
+	 */
+	Integer updateQuestionById(QuestionVO q);
 }
