@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cdk.entity.FeedObject;
 
 import com.cdk.entity.Question;
+import com.cdk.entity.QuestionFollow;
 import com.cdk.entity.QuestionVO;
+import com.cdk.entity.User;
+import com.cdk.service.QuestionFollowService;
 import com.cdk.service.QuestionService;
 
 @Controller
@@ -23,6 +28,9 @@ public class QuestionController {
 	
 	@Autowired
 	private QuestionService questionService;
+	
+	@Autowired
+	private QuestionFollowService questionFollowService;
 	
 	/**
 	 * 获取分页数据
@@ -69,8 +77,75 @@ public class QuestionController {
 	public String questionDetail(Model model,Integer id) {
 		
 		QuestionVO qvo = questionService.getQuestionById(id);
+		qvo.setViewCount(qvo.getViewCount()+1);
+		questionService.updateQuestionById(qvo);
 		model.addAttribute("dto", qvo);
 		
 		return "questionDetail";
+	}
+	/**
+	 * 关注
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("followQuestion")
+	public FeedObject followQuestion(HttpServletRequest request,
+			boolean followState,Integer questionId) {
+		FeedObject fo = new FeedObject();
+		fo.setState(true);
+		
+		//获取当前用户id
+		User user = (User) request.getSession().getAttribute("user");
+		if(user==null) {
+			fo.setState(false);
+			fo.setMsg("请先登录。");
+			return fo;
+		}
+		Integer userId = user.getUserId();
+		QuestionFollow qf = new QuestionFollow();
+		qf.setFollowUserId(userId);
+		qf.setQuestionId(questionId);
+		
+		if(!followState) {//添加关注
+			//添加关注信息
+			questionFollowService.addQuestionFollow(qf);
+		}else {//取消关注
+			//删除关注信息
+			questionFollowService.removeQuestionFollow(qf);
+		}
+		
+		return fo;
+	}
+	/**
+	 * 点赞
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("okQuestion")
+	public FeedObject okQuestion(HttpServletRequest request,
+			boolean followState,Integer questionId) {
+		FeedObject fo = new FeedObject();
+		
+		//获取当前用户id
+		User user = (User) request.getSession().getAttribute("user");
+		if(user==null) {
+			fo.setState(false);
+			fo.setMsg("请先登录。");
+			return fo;
+		}
+		
+		if(!followState) {//添加关注
+			//修改点赞的关注数据
+			QuestionVO qvo = questionService.getQuestionById(questionId);
+			qvo.setLikeCount(qvo.getLikeCount()+1);
+			questionService.updateQuestionById(qvo);
+		}else {
+			//修改点赞的关注数据
+			QuestionVO qvo = questionService.getQuestionById(questionId);
+			qvo.setLikeCount(qvo.getLikeCount()-1);
+			questionService.updateQuestionById(qvo);
+		}
+		
+		return fo;
 	}
 }

@@ -5,6 +5,7 @@
 	<title th:text="${dto.qTitle}">发现详情</title>
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="bootstrap/css/bootstrap-table.min.css">
+	<link rel="stylesheet" href="css/questionDetail.css">
 </head>
 <body style="background:#efefef">
 	<div th:insert="navigator :: nav"></div>
@@ -21,6 +22,9 @@
 				<span th:text="${#dates.format(dto.gmtCreate,'yyyy-MM-dd')}"></span> | 
 				<span>阅读数：</span>
 				<span th:text="${dto.viewCount}"></span> 
+				&nbsp;&nbsp;&nbsp;
+				<span class="rightBtn cur" id="follow">+关注</span>
+				<span class="rightBtn cur" id="ok">+点赞</span>
 				
 				<hr>
 				<div th:text="${dto.description}"></div>
@@ -45,6 +49,76 @@
 	<script type="text/javascript" src="bootstrap/js/bootstrap-table.min.js"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap-table-zh-CN.js"></script>
 	<script type="text/javascript" src="js/comm.js"></script>
-	<script type="text/javascript" src="js/questionDetail.js"></script>
+	<script type="text/javascript"  src="js/questionDetail.js"></script>
+	<script type="text/javascript" th:inline="javascript">
+	
+		//初始化关注按钮
+		btnStyle("#follow","+关注","已关注","取消关注","/followQuestion");
+		btnStyle("#ok","+点赞","已点赞","取消点赞","/okQuestion");
+		/**
+		 * 动态设置样式
+		 * @param btnClass
+		 * @param str1 
+		 * @param str2 
+		 * @param str3 
+		 * @param url 
+		 * @returns
+		 */
+		function btnStyle(btnClass,str1,str2,str3,url){
+			$(btnClass).click(function(){
+				let flag=$(this).hasClass("hh");
+				
+				var questionId = [[${dto.questionId}]];
+				$.ajax({
+					url:url,
+					data:{
+						followState:flag,
+						questionId:questionId
+					},
+					dataType:"json",
+					type:"post",
+					async:false,
+					success:function(res){
+						if(!(res.state)){
+							alertModel(res.msg);
+							return; 
+						}
+						
+						if(flag){
+							$(btnClass).text(str1)
+							$(btnClass).addClass("cur")
+							$(btnClass).removeClass("hh")
+						}else{
+							// $(this).addClass()
+							$(btnClass).text(str2)
+							$(btnClass).addClass("hh")
+							$(btnClass).removeClass("cur")
+						}
+					},
+					error:function(){
+						
+					}
+				});
+				
+				
+			});
+			$(btnClass).mouseover(function(){
+				let flag=$(this).hasClass("hh");
+				console.log(flag,888)
+				if(flag){
+					$(this).text(str3)
+				}else{
+					$(this).text(str1)
+				}
+				
+			});
+			$(btnClass).mouseout(function(){
+				let flag=$(this).hasClass("hh");
+				if(flag){
+					$(this).text(str2)
+				}
+			});
+		}
+	</script>
 </body>
 </html>

@@ -1,0 +1,20 @@
+.rightBtn{
+	padding:5px;
+	width: 80px;
+	height: 30px;
+	background: rgba(200, 200, 200, 1);/*灰色*/
+	color: #fff;
+	text-align: center;
+	line-height: 30px;
+	border-radius: 2px;
+	cursor: pointer;
+}
+.cur {
+	background: #FB452F;
+}
+.rightBtn:hover {
+	background: #FF5844;
+}
+.cur:hover {
+	background: #FF5844;
+}

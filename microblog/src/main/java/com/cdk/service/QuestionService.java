@@ -39,4 +39,10 @@ public interface QuestionService {
 	 * @return
 	 */
 	QuestionVO getQuestionById(Integer id);
+	/**
+	 * 根据对象修改question
+	 * @param q
+	 * @return
+	 */
+	Integer updateQuestionById(QuestionVO q);
 }
